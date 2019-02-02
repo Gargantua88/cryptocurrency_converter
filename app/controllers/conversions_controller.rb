@@ -1,5 +1,4 @@
 class ConversionsController < ApplicationController
-
   def index
     if params[:last].present?
       @conversions = Conversion.last(params[:last])
