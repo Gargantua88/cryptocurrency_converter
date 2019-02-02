@@ -7,10 +7,13 @@ namespace :coinmarketcap do
   desc "coinmarketcap request sender"
   task request_sender: :environment do
     url = URI.parse('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest')
+
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
+
     req = Net::HTTP::Get.new(url.request_uri)
     req["X-CMC_PRO_API_KEY"] = ENV["API_TOKEN"]
+
     response = http.request(req)
 
     json = JSON.parse(response.body)

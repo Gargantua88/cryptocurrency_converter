@@ -12,6 +12,8 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
+  gem 'vcr'
+  gem 'webmock'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 

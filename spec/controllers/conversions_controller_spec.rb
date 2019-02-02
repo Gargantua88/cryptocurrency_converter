@@ -8,6 +8,12 @@ RSpec.describe ConversionsController, type: :controller do
           final_currency: 'BTC',
           amount: '1'
       }
+
+      @incorrect_params = {
+          initial_currency: 'SNOOR_DOGG_COIN',
+          final_currency: 'BTC',
+          amount: '1'
+      }
     end
 
     let!(:btc) { FactoryBot.create(:cryptocurrency, symbol: "BTC", price: "200") }
@@ -23,6 +29,12 @@ RSpec.describe ConversionsController, type: :controller do
       post :create, params: {conversion: @params}
 
       expect(Conversion.last.result).to eq 0.5
+    end
+
+    it 'doesnt creates conversion with incorrect params' do
+      post :create, params: {conversion: @incorrect_params}
+
+      expect(Conversion.all.length).to eq 1
     end
   end
 end
