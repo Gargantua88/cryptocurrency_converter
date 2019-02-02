@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2019_02_01_114850) do
 
   create_table "conversions", force: :cascade do |t|
-    t.integer "initial_currency"
-    t.integer "final_currency"
+    t.integer "initial_currency_id"
+    t.integer "final_currency_id"
     t.float "amount"
     t.float "result"
     t.datetime "created_at", null: false
