@@ -1,12 +1,20 @@
 class Conversion < ApplicationRecord
+  belongs_to :initial_currency, class_name: 'Cryptocurrency'
+  belongs_to :final_currency, class_name: 'Cryptocurrency'
+
   validates :initial_currency, :final_currency, :amount, presence: true
 
   before_save :calculate_result
 
-  def calculate_result
-    @currency1 = Cryptocurrency.find_by(symbol: initial_currency)
-    @currency2 = Cryptocurrency.find_by(symbol: final_currency)
+  def initial_currency_sym=(sym)
+    self.initial_currency = Cryptocurrency.find_by(symbol: sym)
+  end
 
-    self.result = (@currency1.price * amount) / @currency2.price
+  def final_currency_sym=(sym)
+    self.final_currency = Cryptocurrency.find_by(symbol: sym)
+  end
+
+  def calculate_result
+    self.result = (initial_currency.price * amount) / final_currency.price
   end
 end

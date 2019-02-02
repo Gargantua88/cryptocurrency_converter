@@ -23,6 +23,6 @@ class ConversionsController < ApplicationController
   private
 
   def conversion_params
-    params.fetch(:conversion, {}).permit(:from_cur, :to_cur, :amount)
+    params.fetch(:conversion, {}).permit(:initial_currency_sym, :final_currency_sym, :amount)
   end
 end
